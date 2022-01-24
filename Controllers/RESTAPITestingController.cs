@@ -8,18 +8,17 @@ namespace WAISM_TestingAPI.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class AddressesController : ControllerBase
+    public class RESTAPITestingController : ControllerBase
     {
         private readonly IMapper _mapper;
         private readonly AddressRepository _addressRepository;
 
-        public AddressesController(IMapper mapper, AddressRepository addressRepository)
+        public RESTAPITestingController(IMapper mapper, AddressRepository addressRepository)
         {
             _mapper = mapper;
             _addressRepository = addressRepository;
         }
 
-        // GET addresses/
         [HttpGet("", Name = "GetAllAddresses")]
         public ActionResult<IEnumerable<AddressDto>> GetAllAddresses()
         {
@@ -33,7 +32,6 @@ namespace WAISM_TestingAPI.Controllers
             return Ok(addressesDto);
         }
 
-        // GET addresses/5
         [HttpGet("{id}", Name = "GetAddressById")]
         public ActionResult<AddressDto> GetAddressById(int id)
         {
@@ -46,7 +44,7 @@ namespace WAISM_TestingAPI.Controllers
             return NotFound();
         }
 
-        // POST addresses
+        
         [HttpPost("", Name = "CreateAddress")]
         public ActionResult<AddressDto> CreateAddress([FromBody] AddressDto addressDto)
         {
@@ -59,7 +57,7 @@ namespace WAISM_TestingAPI.Controllers
 
         }
 
-        // PUT addresses/5
+        
         [HttpPut("{id}", Name= "UpdateAddress")]
         public IActionResult UpdateAddress(int id, [FromBody] AddressDto addressDto)
         {
@@ -73,7 +71,7 @@ namespace WAISM_TestingAPI.Controllers
             return Ok();
         }
 
-        // DELETE addresses/5
+        
         [HttpDelete("{id}", Name = "DeleteAddress")]
         public IActionResult DeleteAddress(int id)
         {

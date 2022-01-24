@@ -4,12 +4,12 @@ namespace WAISM_TestingAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class TestingController : ControllerBase
+    public class StringOperationsTestingController : ControllerBase
     {
 
-        private readonly ILogger<TestingController> _logger;
+        private readonly ILogger<StringOperationsTestingController> _logger;
 
-        public TestingController(ILogger<TestingController> logger)
+        public StringOperationsTestingController(ILogger<StringOperationsTestingController> logger)
         {
             _logger = logger;
         }
