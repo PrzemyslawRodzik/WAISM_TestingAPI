@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WAISM_TestingAPI", "WAISM_TestingAPI.csproj", "{A5AE2AE2-89EC-4FD5-8C72-5815B209C868}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageBrokers_TestingAPI", "MessageBrokers_TestingAPI.csproj", "{A5AE2AE2-89EC-4FD5-8C72-5815B209C868}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

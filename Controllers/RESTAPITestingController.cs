@@ -4,82 +4,44 @@ using WAISM_TestingAPI.Repositories;
 using WAISM_TestingAPI.Dtos;
 using WAISM_TestingAPI.Models;
 
-namespace WAISM_TestingAPI.Controllers
+namespace MessageBrokers_TestingAPI.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class RESTAPITestingController : ControllerBase
+    public class KaffkaController : ControllerBase
     {
         private readonly IMapper _mapper;
         private readonly AddressRepository _addressRepository;
 
-        public RESTAPITestingController(IMapper mapper, AddressRepository addressRepository)
+        public KaffkaController(IMapper mapper, AddressRepository addressRepository)
         {
             _mapper = mapper;
             _addressRepository = addressRepository;
         }
 
-        [HttpGet("", Name = "GetAllAddresses")]
-        public ActionResult<IEnumerable<AddressDto>> GetAllAddresses()
+        // GET testing/strings/concatenation?input1=przemek&input2=rodzik&input3=jest&input4=super
+        [HttpGet("complexity", Name = "StringConcatenation")]
+        public string StringConcatenation([FromQuery] string depth)
         {
-            List<Address> addresses = null;
-            addresses = _addressRepository.GetAll();
-
-            if (addresses.Count <= 0)
-                return NoContent();
-
-            var addressesDto = _mapper.Map<IEnumerable<AddressDto>>(addresses);
-            return Ok(addressesDto);
+            return depth;
         }
 
-        [HttpGet("{id}", Name = "GetAddressById")]
-        public ActionResult<AddressDto> GetAddressById(int id)
+        [HttpGet("replication", Name = "StringConcatenation2")]
+        public string StringConcatenation2([FromQuery] string quantity)
         {
-
-            var address = _addressRepository.GetById(id);
-            var addressDto = _mapper.Map<AddressDto>(address);
-            if (address != null)
-                return Ok(addressDto);
-
-            return NotFound();
+            return quantity;
         }
 
-        
-        [HttpPost("", Name = "CreateAddress")]
-        public ActionResult<AddressDto> CreateAddress([FromBody] AddressDto addressDto)
+        [HttpGet("messageSize", Name = "StringConcatenation3")]
+        public string StringConcatenation3([FromQuery] string size)
         {
-            var address = _mapper.Map<Address>(addressDto);
-            _addressRepository.Add(address);
-
-            var addressDtoResult = _mapper.Map<AddressDto>(address);
-
-            return CreatedAtRoute(nameof(GetAddressById), new { Id = address.Id }, addressDtoResult);
-
+            return size;
         }
 
-        
-        [HttpPut("{id}", Name= "UpdateAddress")]
-        public IActionResult UpdateAddress(int id, [FromBody] AddressDto addressDto)
+        [HttpGet("prodcons", Name = "StringConcatenation23")]
+        public string StringConcatenation23([FromQuery] string producersCount, [FromQuery]  string consumersCount)
         {
-            var address = _addressRepository.GetById(id);
-            if (address is null)
-                return NotFound();
-            _mapper.Map(addressDto, address);
-
-            _addressRepository.Update(address);
-
-            return Ok();
-        }
-
-        
-        [HttpDelete("{id}", Name = "DeleteAddress")]
-        public IActionResult DeleteAddress(int id)
-        {
-            var address = _addressRepository.GetById(id);
-            if (address is null)
-                return NotFound();
-            _addressRepository.Delete(address);
-            return Ok();
+            return producersCount;
         }
     }
 }
